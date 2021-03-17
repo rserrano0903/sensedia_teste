@@ -20,7 +20,19 @@ Copy `.env` file
 
 ## Step 04
 
-Configure your database with your credentials. After configure the `.env` file and run this:
+Configure your database with your credentials. After configure the `.env` file.
+
+
+### For SQLITE edit line 11
+
+```
+DB_CONNECTION=sqlite
+
+```
+
+## Step 05
+
+Run this commands for install the application:
 
 ```
 sudo docker-compose build app
@@ -28,6 +40,14 @@ sudo docker-compose up -d
 sudo docker-compose ps
 sudo docker-compose exec app composer install
 docker-compose exec app php artisan migrate
+```
+
+## Step 06
+
+Stopping the services
+
+```
+sudo docker-compose down
 ```
 
 ## Endpoints
