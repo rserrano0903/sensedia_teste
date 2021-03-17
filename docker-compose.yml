@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: root
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: sensedia
+    container_name: sensedia-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - sensedia
+
+  nginx:
+    image: nginx:alpine
+    container_name: sensedia-nginx
+    restart: unless-stopped
+    ports:
+      - 8383:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - sensedia
+
+networks:
+  sensedia:
+    driver: bridge
